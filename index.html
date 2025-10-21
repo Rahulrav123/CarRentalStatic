@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Car Rental App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <h1 class="brand">CarRental</h1>
+      <nav>
+        <button id="showCatalogBtn" class="nav-btn active">Catalog</button>
+        <button id="showBookingsBtn" class="nav-btn">My Bookings</button>
+        <button id="showAdminBtn" class="nav-btn">Admin</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Search & Filters -->
+    <section class="controls">
+      <input id="searchInput" type="search" placeholder="Search cars by name..." />
+      <select id="typeFilter">
+        <option value="">All types</option>
+        <option value="Sedan">Sedan</option>
+        <option value="Hatchback">Hatchback</option>
+        <option value="SUV">SUV</option>
+        <option value="Van">Van</option>
+      </select>
+      <button id="clearFilters">Clear</button>
+    </section>
+
+    <!-- Catalog -->
+    <section id="catalogView" class="view">
+      <h2>Available Cars</h2>
+      <div id="carsGrid" class="grid"></div>
+      <p id="noCarsMsg" class="muted" style="display:none;">No cars found.</p>
+    </section>
+
+    <!-- Bookings -->
+    <section id="bookingsView" class="view" style="display:none;">
+      <h2>My Bookings</h2>
+      <div id="bookingsList"></div>
+      <p id="noBookingsMsg" class="muted" style="display:none;">You have no bookings yet.</p>
+    </section>
+
+    <!-- Admin -->
+    <section id="adminView" class="view" style="display:none;">
+      <h2>Admin - Manage Cars</h2>
+      <form id="addCarForm" class="card form-card">
+        <div class="form-row">
+          <label>Car Name<input id="carName" required /></label>
+          <label>Type
+            <select id="carType">
+              <option>Sedan</option>
+              <option>Hatchback</option>
+              <option>SUV</option>
+              <option>Van</option>
+            </select>
+          </label>
+          <label>Price / day (₹)<input id="carPrice" type="number" min="0" required/></label>
+        </div>
+        <div class="form-row">
+          <label>Image URL (optional)<input id="carImage" placeholder="https://..." /></label>
+          <button type="submit" class="btn">Add Car</button>
+        </div>
+      </form>
+
+      <h3>Existing Cars</h3>
+      <div id="manageCarsList" class="grid"></div>
+    </section>
+  </main>
+
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="modal" aria-hidden="true">
+    <div class="modal-content card">
+      <button id="closeModal" class="close">&times;</button>
+      <h3 id="modalCarName">Book Car</h3>
+      <form id="bookingForm" class="form-card">
+        <input type="hidden" id="modalCarId" />
+        <div class="form-row">
+          <label>Start Date<input id="startDate" type="date" required /></label>
+          <label>End Date<input id="endDate" type="date" required /></label>
+        </div>
+        <div class="form-row">
+          <label>Full Name<input id="renterName" required /></label>
+          <label>Phone<input id="renterPhone" required /></label>
+        </div>
+
+        <p class="muted">Price: <span id="pricePreview">₹0</span></p>
+        <div class="form-row">
+          <button type="submit" class="btn primary">Confirm Booking</button>
+          <button type="button" id="cancelModal" class="btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">Made with ♥ — static demo (localStorage)</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
